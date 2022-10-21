@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import check from '../imagens/checkmark-128.png'
 
 
 export default function HabitosPagInicial() {
@@ -10,7 +9,6 @@ export default function HabitosPagInicial() {
                 <img src='https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000' alt='' />
             </TopBar>
 
-
             <HomeHabitos>
                 <AdicionarHabitos>
                     <span>Meus hábitos</span>
@@ -18,7 +16,7 @@ export default function HabitosPagInicial() {
                 </AdicionarHabitos>
 
                 <CriarHabito>
-                    <input placeholder="nome do hábito"/>
+                    <input placeholder="nome do hábito" />
                     <ul>
                         <li>D</li>
                         <li>S</li>
@@ -37,7 +35,7 @@ export default function HabitosPagInicial() {
                 <ListaHabitos>
                     <Habito>
                         <span>Titulo tarefa</span>
-                        <img src="https://cdn-icons-png.flaticon.com/512/54/54324.png" alt="lixeira"/>
+                        <img src="https://cdn-icons-png.flaticon.com/512/54/54324.png" alt="lixeira" />
                         <ul>
                             <li>D</li>
                             <li>S</li>
@@ -48,172 +46,23 @@ export default function HabitosPagInicial() {
                             <li>S</li>
                         </ul>
                     </Habito>
-                    
+
                 </ListaHabitos>
-                
+
 
 
                 <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
             </HomeHabitos>
-
-            <HabitosHoje>
-                <div>
-                    <span>Data</span>
-                    <h1>Nenhum hábito concluído ainda</h1>
-                </div>
-                <HabitoNaoConcluido>
-                    <footer>
-                        <h2>Titulo habito</h2>
-                        <h3>Sequência atual: 30 dias Seu recorde: 5 dias</h3>
-                    </footer>
-                    <img src={check} alt=""/>
-                    
-                </HabitoNaoConcluido>
-                <HabitoConcluido>
-                    <footer>
-                        <h2>Titulo habito</h2>
-                        <h3>Sequência atual: <strong>30 dias</strong> Seu recorde: <strong>5 dias</strong></h3>
-                    </footer>
-                    <img src={check} alt=""/>
-                    
-                </HabitoConcluido>
-            </HabitosHoje>
-
-            <Historico>
-                <div>
-                    <h1>Histórico</h1>
-                    <h2>Em breve você poderá ver o histórico dos seus hábitos aqui!</h2>
-                </div>
-            </Historico>
-
 
             <BottomBar>
                 <span>Hábitos</span>
                 <div>Hoje</div>
                 <span>Histórico</span>
             </BottomBar>
-
-
         </>
     )
 };
 
-const Historico = styled.div`
-    display:flex;
-    justify-content:center;
-    margin-top:80px;
-    div{
-    display:flex;
-    flex-direction:column;
-    box-sizing:border-box;
-    padding:20px;
-    }
-    h1{
-            font-size:23px;
-            color:#126ba5;
-        }
-    h2{
-            color:#bababa;
-            font-size:18px;
-            margin-top:17px;
-
-        }
-`;
-
-
-
-const HabitoNaoConcluido = styled.div`
-    width:340px;
-    height:94px;
-    background-color:#f1f1f1;
-    display:flex;
-    align-items:center;
-    box-sizing:border-box;
-    padding:15px;
-    border-radius:5px;
-    margin-bottom:15px;
-    footer{
-        width:245px;
-        h2{
-            font-size:20px;
-            color:#666666;
-            width:280px;
-        }
-        h3{
-            font-size:13px;
-            font-weight:400;
-            color:#666;
-            margin-top:7px;
-            width:175px;
-        }
-    }
-    img{
-        background-color:#e7e7e7;
-        width:69px;
-        height:69px;
-        padding:20px;
-        box-sizing:border-box;
-        border-radius:5px;
-    }
-`;
-const HabitoConcluido = styled.div`
-    width:340px;
-    height:94px;
-    background-color:#f1f1f1;
-    display:flex;
-    align-items:center;
-    box-sizing:border-box;
-    padding:15px;
-    border-radius:5px;
-    margin-bottom:15px;
-    footer{
-        width:245px;
-        h2{
-            font-size:20px;
-            color:#666666;
-            width:280px;
-        }
-        h3{
-            font-size:13px;
-            font-weight:400;
-            color:#666;
-            margin-top:7px;
-            width:175px;
-        }
-        strong{
-            color:#8fc549;
-        }
-    }
-    img{
-        background-color:#8fc549;
-        width:69px;
-        height:69px;
-        padding:20px;
-        box-sizing:border-box;
-        border-radius:5px;
-    }
-`;
-const HabitosHoje = styled.div`
-    margin-top:98px;
-    width:100vw;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    div{
-        width:340px;
-        margin-bottom:20px;
-        span{
-            font-size:23px;
-            color:#126ba5;
-        }
-        h1{
-            color:#bababa;
-            font-size:18px;
-            margin-top:5px;
-        }
-    }
-
-`;
 const HomeHabitos = styled.div`
     background-color:#e5e5e5;
     width:100vw;
