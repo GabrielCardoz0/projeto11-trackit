@@ -9,8 +9,9 @@ export default function LoginPage() {
             <Logo><img src={LogoTrackIt} alt=""/></Logo>
             <input placeholder="email"></input>
             <input placeholder="senha"></input>
-            <Link to={'/cadastro'}><button>Entrar</button></Link>
-            <LinkCadastro>Não tem uma conta? Cadastre-se!</LinkCadastro>
+            <Link to={'/habitos'}><button>Entrar</button></Link>
+            <Link to={'/cadastro'}><LinkCadastro>Não tem uma conta? Cadastre-se!</LinkCadastro></Link>
+            
         </FormLogin>
     )
 };
@@ -44,6 +45,7 @@ const FormLogin = styled.div`
         font-size:21px;
         color: #fff;
         margin-top:6px;
+        margin-bottom:20px;
         cursor: pointer;
     }
 `;
@@ -54,3 +56,4 @@ const LinkCadastro = styled.span`
     margin-top:25px;
     cursor: pointer;
 `;
+

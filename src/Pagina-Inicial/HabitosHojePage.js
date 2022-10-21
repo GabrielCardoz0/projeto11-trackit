@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import check from '../imagens/checkmark-128.png'
+import { Link } from "react-router-dom";
 
 export default function HabitosHojePage() {
     return (
@@ -33,9 +34,9 @@ export default function HabitosHojePage() {
             </HabitosHoje>
 
             <BottomBar>
-                <span>Hábitos</span>
-                <div>Hoje</div>
-                <span>Histórico</span>
+                <Link to={'/habitos'}><span>Hábitos</span></Link>
+                <Link to={'/hoje'}><div>Hoje</div></Link>
+                <Link to={'/historico'}><span>Histórico</span></Link>
             </BottomBar>
         </>
     )
@@ -166,9 +167,11 @@ const BottomBar = styled.div`
     position:fixed;
     bottom:0;
     font-size:18px;
+    text-decoration:none;
     span{
         padding:28px;
         color:#52b6ff;
+        cursor:pointer;
     }
     div{
         background-color:#52b6ff;
@@ -180,5 +183,6 @@ const BottomBar = styled.div`
         align-items:center;
         margin-bottom:45px;
         color: #fff;
+        cursor:pointer;
     }
 `;

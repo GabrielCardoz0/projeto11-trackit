@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 export default function HabitosPagInicial() {
@@ -8,7 +9,7 @@ export default function HabitosPagInicial() {
                 <span>TrackIt</span>
                 <img src='https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000' alt='' />
             </TopBar>
-
+            
             <HomeHabitos>
                 <AdicionarHabitos>
                     <span>Meus hábitos</span>
@@ -16,7 +17,7 @@ export default function HabitosPagInicial() {
                 </AdicionarHabitos>
 
                 <CriarHabito>
-                    <input placeholder="nome do hábito" />
+                    <input placeholder="nome do hábito"/>
                     <ul>
                         <li>D</li>
                         <li>S</li>
@@ -35,7 +36,7 @@ export default function HabitosPagInicial() {
                 <ListaHabitos>
                     <Habito>
                         <span>Titulo tarefa</span>
-                        <img src="https://cdn-icons-png.flaticon.com/512/54/54324.png" alt="lixeira" />
+                        <img src="https://cdn-icons-png.flaticon.com/512/54/54324.png" alt="lixeira"/>
                         <ul>
                             <li>D</li>
                             <li>S</li>
@@ -46,18 +47,18 @@ export default function HabitosPagInicial() {
                             <li>S</li>
                         </ul>
                     </Habito>
-
+                    
                 </ListaHabitos>
-
+                
 
 
                 <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
             </HomeHabitos>
 
             <BottomBar>
-                <span>Hábitos</span>
-                <div>Hoje</div>
-                <span>Histórico</span>
+                <Link to={'/habitos'}><span>Hábitos</span></Link>
+                <Link to={'/hoje'}><div>Hoje</div></Link>
+                <Link to={'/historico'}><span>Histórico</span></Link>
             </BottomBar>
         </>
     )
@@ -129,9 +130,11 @@ const BottomBar = styled.div`
     position:fixed;
     bottom:0;
     font-size:18px;
+    text-decoration:none;
     span{
         padding:28px;
         color:#52b6ff;
+        cursor:pointer;
     }
     div{
         background-color:#52b6ff;
@@ -143,6 +146,7 @@ const BottomBar = styled.div`
         align-items:center;
         margin-bottom:45px;
         color: #fff;
+        cursor:pointer;
     }
 `;
 const CriarHabito = styled.div`

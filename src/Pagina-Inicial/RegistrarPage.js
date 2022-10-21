@@ -4,20 +4,24 @@ import LogoTrackIt from '../imagens/Group 8.png'
 
 export default function RegistrarPage() {
     return (
-        <>
+        <PaginaRegistro>
             <Logo><img src={LogoTrackIt} alt="" /></Logo>
             <FormRegistro>
                 <input placeholder="email"></input>
                 <input placeholder="senha"></input>
                 <input placeholder="nome"></input>
                 <input placeholder="foto"></input>
-                <Link to={'/'}><button>Cadastrar</button></Link>
-                <LinkLogin>Já tem uma conta? Faça login!</LinkLogin>
+                <Link to={'/habitos'}><button>Cadastrar</button></Link>
+                <Link to={'/'}><LinkLogin>Já tem uma conta? Faça login!</LinkLogin></Link>
             </FormRegistro>
-        </>
+        </PaginaRegistro>
     )
 };
-
+const PaginaRegistro = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+`;
 const Logo = styled.div`
     width:180px;
     height:179px;
@@ -48,6 +52,7 @@ const FormRegistro = styled.div`
         color: #fff;
         margin-top:6px;
         cursor: pointer;
+        margin-bottom:20px;
     }
 `;
 const LinkLogin = styled.span`
