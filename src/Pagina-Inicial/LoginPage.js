@@ -52,7 +52,6 @@ const FormLogin = styled.div`
 const LinkCadastro = styled.span`
     color: #52b6ff;
     font-size:14px;
-    text-decoration-line:underline;
     margin-top:25px;
     cursor: pointer;
 `;
