@@ -1,42 +1,85 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import react from "react";
+
+
+
+
 
 
 export default function HabitosPagInicial() {
+
+    function adicionarHabito() {
+        setArrAddHabito([1])
+    }
+
+    function cancelarHabito(num){
+        const newArr = arrAddHabito.filter((n) => (n !== num))
+        setArrAddHabito(newArr)
+        console.log(newArr)
+    }
+
+    function salvarHabito(){
+        setArrAddHabito([])
+    }
+
+    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
+
+    const [diasSelecionados, setDiasSelecionados] = react.useState([])
+
+    const [arrAddHabito, setArrAddHabito] = react.useState([])
+
+    const [tituloHabito, setTituloHabito] = react.useState('')
+
+    function retirarDia(d){
+        const newArr = diasSelecionados.filter((dia) => dia !== d )
+        setDiasSelecionados(newArr)
+    }
+
+    function adicionarDia(d){
+        setDiasSelecionados([...diasSelecionados, d])
+    }
+
     return (
         <>
             <TopBar>
                 <span>TrackIt</span>
                 <img src='https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000' alt='' />
             </TopBar>
-            
+
             <HomeHabitos>
                 <AdicionarHabitos>
                     <span>Meus hábitos</span>
-                    <button>+</button>
+                    <button onClick={adicionarHabito}>+</button>
                 </AdicionarHabitos>
 
-                <CriarHabito>
-                    <input placeholder="nome do hábito"/>
-                    <ul>
-                        <li>D</li>
-                        <li>S</li>
-                        <li>T</li>
-                        <li>Q</li>
-                        <li>Q</li>
-                        <li>S</li>
-                        <li>S</li>
-                    </ul>
-                    <div>
-                        <BotaoCancelar>Cancelar</BotaoCancelar>
-                        <BotaoSalvar>Salvar</BotaoSalvar>
-                    </div>
-                </CriarHabito>
+                {arrAddHabito.map((n) => {
+                    return (
+                        <CriarHabito key={n} >
+                            <input placeholder="nome do hábito" onChange={(e) => setTituloHabito(e.target.value)} />
+                            <ul>
+                                {diasSemana.map((d)=>{
+                                
+                                if(diasSelecionados.includes(d)){
+                                    return(<DiaSemana selecionado = {diasSelecionados.includes(d)} onClick={() => retirarDia(d)}>{d[0]}</DiaSemana>)
+                                } else {
+                                    return(<DiaSemana onClick={() => adicionarDia(d)}>{d[0]}</DiaSemana>)
+                                }
+                                
+                                })}
+                            </ul>
+                            <div>
+                                <BotaoCancelar onClick={() => cancelarHabito(n)}>Cancelar</BotaoCancelar>
+                                <BotaoSalvar onClick={salvarHabito}>Salvar</BotaoSalvar>
+                            </div>
+                        </CriarHabito>
+                    )
+                })}
 
                 <ListaHabitos>
                     <Habito>
                         <span>Titulo tarefa</span>
-                        <img src="https://cdn-icons-png.flaticon.com/512/54/54324.png" alt="lixeira"/>
+                        <img src="https://cdn-icons-png.flaticon.com/512/54/54324.png" alt="lixeira" />
                         <ul>
                             <li>D</li>
                             <li>S</li>
@@ -47,12 +90,10 @@ export default function HabitosPagInicial() {
                             <li>S</li>
                         </ul>
                     </Habito>
-                    
+
                 </ListaHabitos>
-                
 
-
-                <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+                <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!{tituloHabito}</p>
             </HomeHabitos>
 
             <BottomBar>
@@ -156,6 +197,7 @@ const CriarHabito = styled.div`
     background-color:#FFF;
     box-sizing:border-box;
     padding:19px;
+    margin-bottom:15px;
     input{
         border: 1px solid #d5d5d5;
         border-radius:5px;
@@ -171,18 +213,6 @@ const CriarHabito = styled.div`
     ul{
         display:flex;
         margin-top:10px;
-        li{
-            width:30px;
-            height:30px;
-            border: 1px solid #d5d5d5;
-            border-radius:5px;
-            color:#d5d5d5;
-            font-size:20px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            margin-right:4px;
-        }
     }
     div{
         display:flex;
@@ -254,4 +284,18 @@ const Habito = styled.div`
             margin-right:4px;
         }
     }
+`;
+const DiaSemana = styled.li`
+    width:30px;
+    height:30px;
+    border: 1px solid #d5d5d5;
+    border-radius:5px;
+    color:${(props) => props.selecionado? '#fff':'#d5d5d5'};
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:4px;
+    background-color:${(props) => props.selecionado? '#d5d5d5':'#fff'};
+    cursor:pointer;
 `;
