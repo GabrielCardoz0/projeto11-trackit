@@ -17,10 +17,12 @@ export default function HabitosPagInicial() {
         const newArr = arrAddHabito.filter((n) => (n !== num))
         setArrAddHabito(newArr)
         console.log(newArr)
+        setDiasSelecionados([])
     }
 
     function salvarHabito(){
         setArrAddHabito([])
+        setDiasSelecionados([])
     }
 
     const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
