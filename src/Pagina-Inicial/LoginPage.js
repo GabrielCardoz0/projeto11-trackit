@@ -15,7 +15,7 @@ import react from "react";
 export default function LoginPage(e) {
 
 
-    const {usuario, setUsuario} = react.useContext(AuthContext)
+    const {setUsuario} = react.useContext(AuthContext)
 
     
 

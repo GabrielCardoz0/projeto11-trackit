@@ -8,6 +8,8 @@ export default function HistoricoPage() {
 
     const {usuario} = react.useContext(AuthContext)
 
+    
+
     return(
         <>
             <TopBar>
