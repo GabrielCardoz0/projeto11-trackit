@@ -34,9 +34,22 @@ export default function HabitosHojePage() {
 
     const newArr = [...listaHabitosHoje];
     newArr[ind].done = true;
-    newArr[ind].currentSequence = +1;
-    newArr[ind].highestSequence = +1;
+    newArr[ind].currentSequence = newArr[ind].currentSequence+1;
+    newArr[ind].highestSequence =  newArr[ind].highestSequence+1;
     setListaHabitosHoje(newArr);
+  }
+
+  function desmarcarConcluido(id, ind){
+    console.log(id+' oi '+ind)
+    const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`
+    axios.post(URL,{}, config).then(() => console.log('deu tudo certo')).catch((err) => console.log(err.response.data))
+
+    const newArr = [...listaHabitosHoje]
+    newArr[ind].done = false;
+    newArr[ind].currentSequence = newArr[ind].currentSequence-1;
+    newArr[ind].highestSequence = newArr[ind].highestSequence-1;
+    setListaHabitosHoje(newArr)
+
   }
 
   return (
@@ -63,7 +76,7 @@ export default function HabitosHojePage() {
                     Seu recorde: <strong>{h.highestSequence} dia(s)</strong>
                   </h3>
                 </footer>
-                <img onClick={() => marcarConcluido(h.id)} src={check} alt="" />
+                <img onClick={() => desmarcarConcluido(h.id, ind)} src={check} alt="" />
               </HabitoConcluido>
             );
           } else if (h.done) {
@@ -76,7 +89,7 @@ export default function HabitosHojePage() {
                     {h.highestSequence} dias
                   </h3>
                 </footer>
-                <img onClick={() => marcarConcluido(h.id)} src={check} alt="" />
+                <img onClick={() => desmarcarConcluido(h.id, ind)} src={check} alt="" />
               </HabitoConcluido>
             );
           } else {
