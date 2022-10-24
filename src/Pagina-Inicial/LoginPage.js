@@ -64,6 +64,7 @@ const FormLogin = styled.form`
     flex-direction:column;
     align-items:center;
     margin-top:20px;
+	font-family: 'Lexend Deca', sans-serif;
     input{
         width:303px;
         height:45px;

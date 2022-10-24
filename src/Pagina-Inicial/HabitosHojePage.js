@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 import react, { useEffect } from "react";
 import { AuthContext } from "./auth";
 import axios from "axios";
+import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
+import dayjs from "dayjs";
+import ptBr from 'dayjs/locale/pt-br'
+
+
 
 export default function HabitosHojePage() {
   const { usuario } = react.useContext(AuthContext);
-
   const [listaHabitosHoje, setListaHabitosHoje] = react.useState([]);
+
+  const arrayDeValorUnico = [1]
 
   const config = {
     headers: {
@@ -16,12 +22,14 @@ export default function HabitosHojePage() {
     },
   };
 
+
+  const diaHoje = dayjs().locale(ptBr).format("dddd, DD/MM")
+
   useEffect(() => {
     const URL =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
     axios.get(URL, config).then((res) => {
       setListaHabitosHoje(res.data);
-      console.log(res.data);
     });
   }, []);
 
@@ -40,9 +48,8 @@ export default function HabitosHojePage() {
   }
 
   function desmarcarConcluido(id, ind){
-    console.log(id+' oi '+ind)
     const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`
-    axios.post(URL,{}, config).then(() => console.log('deu tudo certo')).catch((err) => console.log(err.response.data))
+    axios.post(URL,{}, config).catch((err) => console.log(err.response.data))
 
     const newArr = [...listaHabitosHoje]
     newArr[ind].done = false;
@@ -51,6 +58,19 @@ export default function HabitosHojePage() {
     setListaHabitosHoje(newArr)
 
   }
+
+  useEffect(()=>{
+    const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily'
+    axios.get(URL, config).then((res)=> {
+        console.log(res.data)
+    })
+  },[])
+
+
+  const porcentagem = 25;
+
+
+
 
   return (
     <>
@@ -61,8 +81,16 @@ export default function HabitosHojePage() {
 
       <HabitosHoje>
         <div>
-          <span>Data</span>
-          <h1>Nenhum hábito concluído ainda</h1>
+          <span>{diaHoje}</span>
+          {arrayDeValorUnico.map(()=>{
+            if(listaHabitosHoje.length===0){
+                return(
+                    <h1>Nenhum hábito concluído ainda</h1>
+                )} else {
+                    return(<h1>Hábitos concluídos: {listaHabitosHoje.length}</h1>)
+                }
+            })}
+          
         </div>
 
         {listaHabitosHoje.map((h, ind) => {
@@ -112,16 +140,6 @@ export default function HabitosHojePage() {
           }
         })}
 
-        {/* <HabitoConcluido>
-          <footer>
-            <h2>Titulo habito</h2>
-            <h3>
-              Sequência atual: <strong>30 dias</strong> Seu recorde:{" "}
-              <strong>5 dias</strong>
-            </h3>
-          </footer>
-          <img src={check} alt="" />
-        </HabitoConcluido> */}
       </HabitosHoje>
 
       <BottomBar>
@@ -129,7 +147,20 @@ export default function HabitosHojePage() {
           <span>Hábitos</span>
         </Link>
         <Link to={"/hoje"}>
-          <div>Hoje</div>
+            <div>
+                <CircularProgressbarWithChildren background={true} styles={buildStyles({
+                    rotation:0.5,
+                    strokeLinecap:'butt',
+                    textSize:'16px',
+                    pathTransitionsDurantion:0.5,
+                    pathColor:'#fff',
+                    textColor:'#f88',
+                    trailColor:"rgba(62,152,199, 80",
+                    
+                })} value={porcentagem}>
+                    hoje
+                </CircularProgressbarWithChildren>
+            </div>
         </Link>
         <Link to={"/historico"}>
           <span>Histórico</span>
@@ -212,6 +243,7 @@ const HabitoConcluido = styled.div`
 `;
 const HabitosHoje = styled.div`
   margin-top: 98px;
+	font-family: 'Lexend Deca', sans-serif;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -232,6 +264,7 @@ const HabitosHoje = styled.div`
 `;
 const TopBar = styled.div`
   position: fixed;
+  font-family: 'Playball', cursive;
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -242,7 +275,7 @@ const TopBar = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   span {
     margin: 18px;
-    font-size: 18px;
+    font-size: 39px;
     color: #fff;
   }
   img {
@@ -254,6 +287,7 @@ const TopBar = styled.div`
 `;
 const BottomBar = styled.div`
   display: flex;
+	font-family: 'Lexend Deca', sans-serif;
   justify-content: space-around;
   align-items: center;
   background-color: #ffffff;

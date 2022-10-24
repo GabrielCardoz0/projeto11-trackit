@@ -37,6 +37,7 @@ const Historico = styled.div`
     display:flex;
     justify-content:center;
     margin-top:80px;
+	font-family: 'Lexend Deca', sans-serif;
     div{
     display:flex;
     flex-direction:column;
@@ -56,6 +57,8 @@ const Historico = styled.div`
 `;
 const TopBar = styled.div`
     position:fixed;
+    font-family: 'Playball', cursive;
+    font-size:39px;
     top:0;
     display:flex;
     justify-content:space-between;
@@ -66,7 +69,6 @@ const TopBar = styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     span{
         margin:18px;
-        font-size:18px;
         color: #fff;
     }
     img{
@@ -87,6 +89,7 @@ const BottomBar = styled.div`
     bottom:0;
     font-size:18px;
     text-decoration:none;
+	font-family: 'Lexend Deca', sans-serif;
     span{
         padding:28px;
         color:#52b6ff;

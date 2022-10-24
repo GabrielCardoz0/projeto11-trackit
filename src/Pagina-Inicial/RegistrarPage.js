@@ -92,6 +92,7 @@ const FormRegistro = styled.form`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+	font-family: 'Lexend Deca', sans-serif;
   input {
     width: 303px;
     height: 45px;
@@ -121,4 +122,5 @@ const LinkLogin = styled.span`
   text-decoration-line: underline;
   margin-top: 25px;
   cursor: pointer;
+	font-family: 'Lexend Deca', sans-serif;
 `;

@@ -12,6 +12,7 @@ export default function HabitosPagInicial() {
   const [arrAddHabito, setArrAddHabito] = react.useState([]);
   const [tituloHabito, setTituloHabito] = react.useState("");
   const [habitosCriados, setHabitosCriados] = react.useState([]);
+  const arrayDeValorUnico = [1]
 
   const numDiasSemana = [0, 1, 2, 3, 4, 5, 6];
 
@@ -159,11 +160,17 @@ export default function HabitosPagInicial() {
             );
           })}
         </ListaHabitos>
-
-        <p>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </p>
+          {arrayDeValorUnico.map(()=>{
+            if(habitosCriados.length ===0){
+              return(<p>
+                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+                começar a trackear!
+              </p>)
+            } else{
+              return(<p></p>)
+            }
+          })}
+        
       </HomeHabitos>
 
       <BottomBar>
@@ -183,6 +190,7 @@ export default function HabitosPagInicial() {
 
 const HomeHabitos = styled.div`
   background-color: #e5e5e5;
+	font-family: 'Lexend Deca', sans-serif;
   width: 100vw;
   margin-top: 70px;
   display: flex;
@@ -217,6 +225,8 @@ const AdicionarHabitos = styled.div`
   }
 `;
 const TopBar = styled.div`
+font-family: 'Playball', cursive;
+font-size:39px;
   position: fixed;
   top: 0;
   display: flex;
@@ -229,7 +239,6 @@ const TopBar = styled.div`
   z-index: 1;
   span {
     margin: 18px;
-    font-size: 18px;
     color: #fff;
   }
   img {
@@ -250,6 +259,7 @@ const BottomBar = styled.div`
   bottom: 0;
   font-size: 18px;
   text-decoration: none;
+	font-family: 'Lexend Deca', sans-serif;
   span {
     padding: 28px;
     color: #52b6ff;
