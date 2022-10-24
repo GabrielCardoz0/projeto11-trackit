@@ -12,8 +12,9 @@ export default function RegistrarPage() {
   const [fotoUser, setFotoUser] = react.useState("");
   const navigate = useNavigate()
 
-  function cadastrar(e) {
 
+
+  function cadastrar(e) {
     e.preventDefault();
 
     const novoUsuario = {
@@ -25,7 +26,7 @@ export default function RegistrarPage() {
 
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
 
-    axios.post(URL, novoUsuario).then(() => navigate('/habitos')).catch((err) => {
+    axios.post(URL, novoUsuario).then(() => navigate('/')).catch((err) => {
       Swal.fire({
         icon: "error",
         title: "Oops... há algo errado",
@@ -67,6 +68,7 @@ export default function RegistrarPage() {
         ></input>
 
         <button type="submit">Cadastrar</button>
+        
         <Link to={"/"}>
           <LinkLogin>Já tem uma conta? Faça login!</LinkLogin>
         </Link>

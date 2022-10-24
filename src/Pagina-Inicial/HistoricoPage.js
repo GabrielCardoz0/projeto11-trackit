@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import react from "react";
+import { AuthContext } from "./auth";
 
 
 export default function HistoricoPage() {
+
+    const {usuario} = react.useContext(AuthContext)
+
     return(
         <>
             <TopBar>
                 <span>TrackIt</span>
-                <img src='https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000' alt='' />
+                <img src={usuario.image} alt='' />
             </TopBar>
 
             <Historico>

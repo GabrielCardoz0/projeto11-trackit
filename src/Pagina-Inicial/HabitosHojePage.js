@@ -1,13 +1,20 @@
 import styled from "styled-components";
 import check from '../imagens/checkmark-128.png'
 import { Link } from "react-router-dom";
+import react from "react";
+import { AuthContext } from "./auth";
 
 export default function HabitosHojePage() {
+
+    const {usuario} = react.useContext(AuthContext)
+
+    // https://i.pinimg.com/originals/d3/be/08/d3be083885874b41ff1d50fc946c666a.png
+    // 'https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000'
     return (
         <>
             <TopBar>
                 <span>TrackIt</span>
-                <img src='https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000' alt='' />
+                <img src={usuario.image} alt='' />
             </TopBar>
 
             <HabitosHoje>

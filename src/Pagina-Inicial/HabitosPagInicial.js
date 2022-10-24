@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import react from "react";
+import { AuthContext } from "./auth";
 
 
 
@@ -9,16 +10,12 @@ import react from "react";
 
 export default function HabitosPagInicial() {
 
+    const {usuario} = react.useContext(AuthContext)
+
     const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
-
     const [diasSelecionados, setDiasSelecionados] = react.useState([])
-
     const [arrAddHabito, setArrAddHabito] = react.useState([])
-
     const [tituloHabito, setTituloHabito] = react.useState('')
-
-    const[arrHabitosCriados, setArrHabitosCriados] = react.useState([])
-
 
 
     function adicionarHabito() {
@@ -28,8 +25,8 @@ export default function HabitosPagInicial() {
     function cancelarHabito(num){
         const newArr = arrAddHabito.filter((n) => (n !== num))
         setArrAddHabito(newArr)
-        console.log(newArr)
         setDiasSelecionados([])
+        setTituloHabito('')
     }
 
     function salvarHabito(){
@@ -50,7 +47,7 @@ export default function HabitosPagInicial() {
         <>
             <TopBar>
                 <span>TrackIt</span>
-                <img src='https://img.freepik.com/fotos-premium/cachorrinho-fofo-de-spitz-pomeranian-deitado-no-fundo-amarelo-brilhante_253512-22.jpg?w=2000' alt='' />
+                <img src={usuario.image} alt='' />
             </TopBar>
 
             <HomeHabitos>
@@ -67,9 +64,9 @@ export default function HabitosPagInicial() {
                                 {diasSemana.map((d)=>{
                                 
                                 if(diasSelecionados.includes(d)){
-                                    return(<DiaSemana selecionado = {diasSelecionados.includes(d)} onClick={() => retirarDia(d)}>{d[0]}</DiaSemana>)
+                                    return(<DiaSemana key={d}selecionado = {diasSelecionados.includes(d)} onClick={() => retirarDia(d)}>{d[0]}</DiaSemana>)
                                 } else {
-                                    return(<DiaSemana onClick={() => adicionarDia(d)}>{d[0]}</DiaSemana>)
+                                    return(<DiaSemana key={d} onClick={() => adicionarDia(d)}>{d[0]}</DiaSemana>)
                                 }
                                 
                                 })}
