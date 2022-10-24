@@ -9,6 +9,18 @@ import react from "react";
 
 export default function HabitosPagInicial() {
 
+    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
+
+    const [diasSelecionados, setDiasSelecionados] = react.useState([])
+
+    const [arrAddHabito, setArrAddHabito] = react.useState([])
+
+    const [tituloHabito, setTituloHabito] = react.useState('')
+
+    const[arrHabitosCriados, setArrHabitosCriados] = react.useState([])
+
+
+
     function adicionarHabito() {
         setArrAddHabito([1])
     }
@@ -24,14 +36,6 @@ export default function HabitosPagInicial() {
         setArrAddHabito([])
         setDiasSelecionados([])
     }
-
-    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
-
-    const [diasSelecionados, setDiasSelecionados] = react.useState([])
-
-    const [arrAddHabito, setArrAddHabito] = react.useState([])
-
-    const [tituloHabito, setTituloHabito] = react.useState('')
 
     function retirarDia(d){
         const newArr = diasSelecionados.filter((dia) => dia !== d )
@@ -139,6 +143,7 @@ const AdicionarHabitos = styled.div`
         background-color:#52b6ff;
         color: #fff;
         border-radius:4px;
+        cursor:pointer;
     }
 `;
 const TopBar = styled.div`
@@ -231,6 +236,7 @@ const BotaoCancelar = styled.button`
     color:#52b6ff;
     background-color:#FFF;
     border:none;
+    cursor:pointer;
 `;
 const BotaoSalvar = styled.button`
     display:flex;
@@ -241,6 +247,7 @@ const BotaoSalvar = styled.button`
     background-color:#52b6ff;
     color: #fff;
     border-radius:4px;
+    cursor:pointer;
 `;
 const ListaHabitos = styled.div`
     display:flex;
@@ -269,6 +276,7 @@ const Habito = styled.div`
         position:absolute;
         top:11px;
         right:10px;
+        cursor:pointer;
     }
     ul{
         display:flex;
@@ -284,6 +292,7 @@ const Habito = styled.div`
             align-items:center;
             justify-content:center;
             margin-right:4px;
+            cursor:pointer;
         }
     }
 `;
