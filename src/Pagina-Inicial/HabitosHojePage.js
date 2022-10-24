@@ -16,6 +16,8 @@ export default function HabitosHojePage() {
 
   const arrayDeValorUnico = [1]
 
+  const [habitosTerminados, setHabitosTerminados] = react.useState(0)
+
   const config = {
     headers: {
       Authorization: `Bearer ${usuario.token}`,
@@ -30,8 +32,12 @@ export default function HabitosHojePage() {
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
     axios.get(URL, config).then((res) => {
       setListaHabitosHoje(res.data);
+      const arrQuantidadeHabitos = res.data.filter((obj)=>obj.done)
+      setHabitosTerminados(arrQuantidadeHabitos.length)
     });
   }, []);
+
+
 
   function marcarConcluido(i, ind) {
     const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${i}/check`;
@@ -44,7 +50,9 @@ export default function HabitosHojePage() {
     newArr[ind].done = true;
     newArr[ind].currentSequence = newArr[ind].currentSequence+1;
     newArr[ind].highestSequence =  newArr[ind].highestSequence+1;
-    setListaHabitosHoje(newArr);
+    setListaHabitosHoje(newArr)
+
+    setHabitosTerminados(habitosTerminados+1)
   }
 
   function desmarcarConcluido(id, ind){
@@ -57,6 +65,9 @@ export default function HabitosHojePage() {
     newArr[ind].highestSequence = newArr[ind].highestSequence-1;
     setListaHabitosHoje(newArr)
 
+    setHabitosTerminados(habitosTerminados-1)
+
+
   }
 
   useEffect(()=>{
@@ -67,7 +78,8 @@ export default function HabitosHojePage() {
   },[])
 
 
-  const porcentagem = 25;
+  let porcentagem = (habitosTerminados/listaHabitosHoje.length)*100;
+
 
 
 
@@ -87,7 +99,7 @@ export default function HabitosHojePage() {
                 return(
                     <h1>Nenhum hábito concluído ainda</h1>
                 )} else {
-                    return(<h1>Hábitos concluídos: {listaHabitosHoje.length}</h1>)
+                    return(<h1>Hábitos concluídos: {habitosTerminados}</h1>)
                 }
             })}
           
@@ -120,6 +132,7 @@ export default function HabitosHojePage() {
                 <img onClick={() => desmarcarConcluido(h.id, ind)} src={check} alt="" />
               </HabitoConcluido>
             );
+            
           } else {
             return (
               <HabitoNaoConcluido key={h.id}>
@@ -138,6 +151,7 @@ export default function HabitosHojePage() {
               </HabitoNaoConcluido>
             );
           }
+          
         })}
 
       </HabitosHoje>
@@ -147,15 +161,15 @@ export default function HabitosHojePage() {
           <span>Hábitos</span>
         </Link>
         <Link to={"/hoje"}>
-            <div>
+            <div className="progress-bar-container">
                 <CircularProgressbarWithChildren background={true} styles={buildStyles({
-                    rotation:0.5,
                     strokeLinecap:'butt',
                     textSize:'16px',
                     pathTransitionsDurantion:0.5,
-                    pathColor:'#fff',
+                    pathColor:'#e5e5e5',
                     textColor:'#f88',
-                    trailColor:"rgba(62,152,199, 80",
+                    trailColor:"rgba(62,152,199, 80)",
+                    backgroundColor:'#3e98c7',
                     
                 })} value={porcentagem}>
                     hoje
@@ -180,6 +194,7 @@ const HabitoNaoConcluido = styled.div`
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 15px;
+  cursor:pointer;
   footer {
     width: 245px;
     h2 {
@@ -214,6 +229,7 @@ const HabitoConcluido = styled.div`
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 15px;
+  cursor:pointer;
   footer {
     width: 245px;
     h2 {
@@ -245,6 +261,7 @@ const HabitosHoje = styled.div`
   margin-top: 98px;
 	font-family: 'Lexend Deca', sans-serif;
   width: 100vw;
+  min-height:100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -302,7 +319,7 @@ const BottomBar = styled.div`
     color: #52b6ff;
     cursor: pointer;
   }
-  div {
+  .progress-bar-container {
     background-color: #52b6ff;
     width: 91px;
     height: 91px;
@@ -310,8 +327,8 @@ const BottomBar = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 45px;
     color: #fff;
     cursor: pointer;
+    margin-bottom:45px;
   }
 `;
